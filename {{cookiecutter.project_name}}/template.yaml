@@ -8,8 +8,8 @@ Resources:
         Description: '本示例通过接收 CMQ 消息队列中指定格式的消息，并根据消息内容向指定的邮箱发送邮件'
         Environment:
           Variables:
-            user_name: 'XXXXXX' 
-            password: 'XXXXXXXXXX'
+            mail_user: 'XXXXXX' 
+            mail_pass: 'XXXXXXXXXX'
         Handler: sendemail.main_handler
         MemorySize: 128
         {%- if cookiecutter.runtime == 'python2.7' %}
