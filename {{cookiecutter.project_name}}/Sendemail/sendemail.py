@@ -14,8 +14,8 @@ from email.header import Header
 
 # 第三方 SMTP 服务,以QQ邮箱为例
 mail_host="smtp.qq.com"         #SMTP服务器
-mail_user=os.environ.get('user_name')     #用户名
-mail_pass=os.environ.get('password')      #SMTP服务的口令
+mail_user=os.environ.get('mail_user')     #用户名
+mail_pass=os.environ.get('mail_pass')      #SMTP服务的口令
 mail_port=465                   #SMTP服务端口
 
 def sendEmail(fromAddr,toAddr,subject,content):
