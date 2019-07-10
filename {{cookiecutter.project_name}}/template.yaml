@@ -1,0 +1,48 @@
+Resources:
+  default:
+    Type: TencentCloud::Serverless::Namespace
+    sendemail_demo:
+      Type: TencentCloud::Serverless::Function
+      Properties:
+        CodeUri: ./Sendemail
+        Description: '本示例通过接收 CMQ 消息队列中指定格式的消息，并根据消息内容向指定的邮箱发送邮件'
+        Environment:
+          Variables:
+            user_name: 'XXXXXX' 
+            password: 'XXXXXXXXXX'
+        Handler: sendemail.main_handler
+        MemorySize: 128
+        {%- if cookiecutter.runtime == 'python2.7' %}
+        Runtime: Python2.7
+        {%- elif cookiecutter.runtime == 'python3.6' %}
+        Runtime: Python3.6
+        {%- else %}
+        Runtime: Python3.6
+        {%- endif %}
+        Timeout: 3
+        Events:
+        #    timer:
+        #        Type: Timer
+        #        Properties:
+        #            CronExpression: '*/5 * * * *'
+        #            Enable: OPEN
+        #    cli-12345678.cos.ap-beijing.myqcloud.com: # full bucket name
+        #        Type: COS
+        #        Properties:
+        #            Filter:
+        #                Prefix: filterdir/
+        #                Suffix: .jpg
+        #            Events: cos:ObjectCreated:*
+        #            Enable: OPEN
+            sendEmailQueue:            # topic name
+                Type: CMQ
+                Properties:
+        #    hello_world_apigw:  # ${FunctionName} + '_apigw'
+        #        Type: APIGW
+        #        Properties:
+        #            StageName: release
+        #            HttpMethod: ANY
+
+Globals:
+  Function:
+    Timeout: 10
